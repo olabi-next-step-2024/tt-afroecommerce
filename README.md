@@ -15,11 +15,11 @@ A entregas devem ser feitas dentro desse repositório, seguindo as instruções 
 
 Clone o repositório
 
-    git clone [https://github.com/olabi-next-step-2024/tm-modulo-3](https://github.com/olabi-next-step-2024/tt-afroecommerce/)
+    git clone https://github.com/olabi-next-step-2024/tt-afroecommerce/
 
 Criem uma pasta com o seu nome no padrão:
 
-    pasta: tt-nomealuno-afroecommerce-service
+    tt-nomealuno-afroecommerce-service
 
 Acesse a pasta do seu repositório
 
