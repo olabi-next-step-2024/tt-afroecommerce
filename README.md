@@ -15,19 +15,23 @@ A entregas devem ser feitas dentro desse repositório, seguindo as instruções 
 
 Clone o repositório
 
-    git clone https://github.com/olabi-next-step-2024/tm-modulo-3
+    git clone [https://github.com/olabi-next-step-2024/tm-modulo-3](https://github.com/olabi-next-step-2024/tt-afroecommerce/)
+
+Criem uma pasta com o seu nome no padrão:
+
+    pasta: tt-nomealuno-afroecommerce-service
 
 Acesse a pasta do seu repositório
 
-    cd tm-modulo-3
+    cd tt-nomealuno-afroecommerce-service
 
 Crie uma branch partir da branch main com a seguinte convenção: tipo_desenvolvimento-seunome-afroecommerce-service. Exemplo:
 
-    git checkout -b doc/diagramadeclasses-juliocesar-1810
+    git checkout -b doc/diagramadeclasses-ewelyn
 
 Com sua branch criada, crie uma pasta na raiz do repositório com essa convenção tm-nomedoaluno-afroecommerce-service. Exemplo:
 
-    tm-juliocesar-afroecommerce-service
+    tm-ewelyn-afroecommerce-service
 
 Ao finalizar o desenvolvimento, você precisa fazer um commit com as suas alterações e na sequência um push para enviar as suas alterações do ambiente local para o ambiente remoto para que vocês possam abrir a suas pull request
 Convenções
