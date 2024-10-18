@@ -39,7 +39,8 @@ Nomeclatura das branch
 
 A convenção a ser usada deve sertipo-desenvolvimento/oquetasendodesenvolvimento-nomedoaluno-data. Exemplo:
 
-feature/cadastrodecliente-juliocesar-1810
+    feature/cadastrodecliente-juliocesar-1810
+
 Nomeclatura de commits
 
 Para o commits, o ideal é que seja usado os commits convencionais.
