@@ -1,31 +1,70 @@
 #include <iostream>
-#include <set>
-#include "Produtos.hpp"
+#include <vector>
+#include "Produto.hpp"
 
 class GerenciadorProdutos
 {
 public:
-    std::set<Produto> produtos;
+    std::vector<Produto*> produtos; 
 
-    void cadastrarProduto(Produto produto)
+    // Função para cadastrar produtos (passando ponteiro para Produto)
+    void cadastrarProduto(Produto* produto)
     {
-        produtos.insert(produto);
+        produtos.push_back(produto);
     }
 
-    // Produto *buscaProduto(std::string nomeProduto)
-    // {
-    //     for (auto &prod : produtos)
-    //     {
-    //         if (prod.getNomeProduto() == nomeProduto)
-    //         {
-    //             return ;
-    //         }
-    //     }
+    // Função para mostrar informações dos produtos cadastrados
+    void mostrarProdutos()
+    {
+        for (const auto &produto : produtos)
+        {
+            produto->print();
+        }
+    }
 
-    //     // produtos.find(produto.nome.equals(NomeProduto));
-    //     // Caso não encontre, vai retornar
-    //     // this->produtos.end();
-    //     // Sugestão: usar std::optional
-    // }
-    // void atualizarProduto(Produto Produto, )
+    // Função para buscar produto pelo nome
+    Produto* buscaProduto(const std::string& nomeProduto)
+    {
+        for (auto &prod : produtos)
+        {
+            if (prod->getNomeProduto() == nomeProduto)
+            {
+                return prod; // Retorna ponteiro para o produto encontrado
+            }
+        }
+        return nullptr; // Retorna nullptr se não encontrar
+    }
+
+    void atualizarProduto(Produto* produto, 
+                          const std::string& novoNome = "", 
+                          const std::string& novaDescricao = "", 
+                          double novoPreco = -1, 
+                          int novoEstoque = -1)
+    {
+        if (novoNome != "") {
+            produto->setNomeProduto(novoNome);
+        }
+
+        if (novaDescricao != "") {
+            produto->setDescricao(novaDescricao);
+        }
+
+        if (novoPreco != -1) {
+            produto->setPrecoProduto(novoPreco);
+        }
+
+        if (novoEstoque != -1) {
+            produto->setQuantidadeEstoque(novoEstoque);
+        }
+    };
+
+    // Destrutor para liberar memória
+    ~GerenciadorProdutos()
+    {
+        
+        for (auto &produto : produtos)
+        {
+            delete produto;
+        }
+    }
 };
