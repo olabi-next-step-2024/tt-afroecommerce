@@ -5,7 +5,7 @@
 class ProdutoFisico : public Produto
 {
 public:
-    const double frete = 8;
+    const double frete = 8; // a constante não está sendo utilizada? se não, remover
 
     ProdutoFisico(std::string nome, std::string descricao, double valor, int quantidade)
         : Produto(nome, descricao, valor, quantidade) {}
@@ -15,7 +15,7 @@ public:
         return nomeProduto;
     }
 
-    void setNomeProduto(const std::string& novoNomeProduto) override
+    void setNomeProduto(const std::string &novoNomeProduto) override
     {
         nomeProduto = novoNomeProduto;
     }
@@ -25,7 +25,7 @@ public:
         return descricaoProduto;
     }
 
-    void setDescricao(const std::string& novaDescricao) override
+    void setDescricao(const std::string &novaDescricao) override
     {
         descricaoProduto = novaDescricao;
     }
@@ -50,17 +50,33 @@ public:
         quantidadeEstoque = novoEstoque;
     }
 
-    
+    double calcularFrete(int distancia)
+    {
+        double valorFrete = 0;
+        if (distancia > 15 && distancia <= 30)
+        {
+            return distancia * (valorFrete + 2);
+        }
+        else if (distancia > 30)
+        {
+            return distancia * (valorFrete + 5);
+        }
+        return valorFrete * distancia;
+    }
 
+
+    // Converter para ser printável via ostream com cout;
     void print() override
     {
-        std::cout << "Nome: " << getNomeProduto() << std::endl;
-        std::cout << "Descrição: " << getDescricao() << std::endl;
-        std::cout << "Preço: " << getPrecoProduto() << std::endl;
-        std::cout << "Estoque: " << getQuantidadeEstoque() << std::endl;
-        std::cout << "-----------------------------" << std::endl;
+        std::cout << "Produto(" 
+            << "nome=" << getNomeProduto() << ", " 
+            << "descr.=" << getDescricao() << ", " 
+            << "preço=" << getPrecoProduto() << ", " 
+            << "qtd.=" << getQuantidadeEstoque() << ")\n";
     }
-    
+
     // Destrutor se necessário
-    ~ProdutoFisico() override {}
+    ~ProdutoFisico() override {} 
+    // como o destrutor da classe base é virtual, o destrutor da classe derivada já o substitui, 
+    // não é necessário o uso de `override`. Mas pode ser usado, caso queira deixar explícito
 };

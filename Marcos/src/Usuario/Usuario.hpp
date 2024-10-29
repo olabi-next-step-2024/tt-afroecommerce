@@ -1,0 +1,4 @@
+class Usuario {
+    private:
+    
+}
