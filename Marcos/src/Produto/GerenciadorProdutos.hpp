@@ -4,13 +4,15 @@
 #include <string>
 #include "Produto.hpp"
 
+// typedef std::vector<std::shared_ptr<Produto>> ListaProdutos;
+
 class GerenciadorProdutos
 {
 public:
-    std::vector<Produto *> produtos;
+    std::vector<std::shared_ptr<Produto>> produtos;
 
     // Função para cadastrar produtos (passando ponteiro para Produto)
-    void cadastrarProduto(Produto *produto)
+    void cadastrarProduto(std::shared_ptr<Produto> &produto)
     {
         std::cout << "Inserindo produto: ";
         produto->print();
@@ -29,10 +31,10 @@ public:
     }
 
     // Função para buscar produto pelo nome
-    Produto *buscaProduto(const std::string &nomeProduto)
+    std::shared_ptr<Produto> buscaProduto(const std::string &nomeProduto)
     {
         auto it = std::find_if(produtos.begin(), produtos.end(),
-                               [&nomeProduto](Produto *x)
+                               [&nomeProduto](const std::shared_ptr<Produto> &x)
                                { return x->getNomeProduto() == nomeProduto; });
 
         return (it != produtos.end()) ? *it : nullptr;
@@ -42,7 +44,7 @@ public:
     void deletarProduto(const std::string &nomeProduto)
     {
         auto it = std::find_if(produtos.begin(), produtos.end(),
-                               [&nomeProduto](Produto *x)
+                               [&nomeProduto](const std::shared_ptr<Produto> &x)
                                { return x->getNomeProduto() == nomeProduto; });
 
         if (it == produtos.end())
@@ -51,12 +53,11 @@ public:
             return;
         }
 
-        delete *it;         // Libera a memória do produto
-        produtos.erase(it); // Remove o ponteiro do vetor
+        produtos.erase(it); // Remove o shared_ptr do vetor
         std::cout << "Produto deletado com sucesso!" << std::endl;
     }
 
-    void atualizarProduto(Produto *produto,
+    void atualizarProduto(std::shared_ptr<Produto> produto,
                           const std::string &novoNome = "",
                           const std::string &novaDescricao = "",
                           double novoPreco = -1,
@@ -90,11 +91,11 @@ public:
     }
 
     // Destrutor para liberar memória
-    ~GerenciadorProdutos()
-    {
-        for (auto &produto : produtos)
-        {
-            delete produto;
-        }
-    }
+    // ~GerenciadorProdutos()
+    // {
+    //     for (std::shared_ptr<Produto> &produto : produtos)
+    //     {
+    //         delete produto; // Como está utilizando smart pointer, não utilizamos o delete. Ele já gerencia o desalocamento
+    //     }
+    // }
 };
