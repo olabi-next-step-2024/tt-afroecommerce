@@ -48,13 +48,24 @@ public:
         quantidadeEstoque = novoEstoque;
     }
 
+    // Colocar esses outputs em uma única linha para ter algo como:
+    // [0] Produto(%%nome%%, %%descrição%%, %%preço%%, %%estoque%%)
+    // [1] Produto(%%nome%%, %%descrição%%, %%preço%%, %%estoque%%)
     void print() override
     {
-        std::cout << "Nome: " << getNomeProduto() << std::endl;
-        std::cout << "Descrição: " << getDescricao() << std::endl;
-        std::cout << "Preço: " << getPrecoProduto() << std::endl;
-        std::cout << "Estoque: " << getQuantidadeEstoque() << std::endl;
-        std::cout << "-----------------------------" << std::endl;
+        // std::cout << "Nome: " << getNomeProduto() << std::endl;
+        // std::cout << "Descrição: " << getDescricao() << std::endl;
+        // std::cout << "Preço: " << getPrecoProduto() << std::endl;
+        // std::cout << "Estoque: " << getQuantidadeEstoque() << std::endl;
+        // std::cout << "-----------------------------" << std::endl;
+
+        std::cout << "Produto(" 
+            << "nome=" << getNomeProduto() << ", " 
+            << "descr=" << getDescricao() << ", " 
+            << "preço=" << getPrecoProduto() << ", " 
+            << "qtd.=" << getQuantidadeEstoque() << ")\n";
+
+        // std::format("");
     }
 
     // Destrutor
