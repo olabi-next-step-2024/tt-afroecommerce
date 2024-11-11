@@ -7,16 +7,13 @@ class Cliente : public Usuario
 {
 
 private:
-    Carrinho *carrinho;
+    std::unique_ptr<Carrinho> carrinho;
 
 public:
     Cliente(const std::string &nome, const std::string &email)
         : Usuario(nome, email), carrinho(new Carrinho()) {}
 
-    ~Cliente()
-    {
-        delete carrinho;
-    }
+    ~Cliente() {}
 
     std::string getNomeCliente() const override
     {
