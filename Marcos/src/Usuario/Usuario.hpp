@@ -12,6 +12,7 @@ public:
     Usuario(std::string nome, std::string email) : nome(nome), email(email) {}
 
     virtual ~Usuario() {}
+    virtual void print() = 0;
 
     // Getters
     virtual std::string getNomeCliente() const = 0;

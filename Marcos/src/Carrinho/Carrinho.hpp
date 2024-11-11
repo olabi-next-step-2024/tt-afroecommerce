@@ -3,7 +3,7 @@
 #include <list>
 #include <algorithm>
 #include <vector>
-#include "src/Produto/Produto.hpp"
+#include "../Produto/Produto.hpp"
 
 class Carrinho
 {

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Usuario.hpp"
-#include "src/Carrinho/Carrinho.hpp"
+#include "../Carrinho/Carrinho.hpp"
 
 class Cliente : public Usuario
 {
@@ -41,5 +41,14 @@ public:
     int getIdCliente() const override
     {
         return id;
+    }
+
+    void print() override
+    {
+        std::cout << "Cliente: "
+                  << getNomeCliente()
+                  << " email: "
+                  << getEmailCliente() 
+                  << ")\n";
     }
 };
