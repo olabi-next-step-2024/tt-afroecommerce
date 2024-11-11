@@ -1,5 +1,11 @@
 #include <iostream>
 
+
+enum Categoria {
+    CatA,
+    CatB
+};
+
 class Produto
 {
 private:
@@ -7,11 +13,12 @@ private:
     std::string descricao;
     std::string nome;
     double preco;
+    int categoria;
 
 public:
     Produto(int id, std::string descricao,
             std::string nome,
-            double preco) : id(id), descricao(descricao), nome(nome), preco(preco) {}
+            double preco, int categoria) : id(id), descricao(descricao), nome(nome), preco(preco), categoria(categoria) {}
 
     int getId()
     {
