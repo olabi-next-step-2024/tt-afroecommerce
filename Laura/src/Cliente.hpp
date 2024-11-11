@@ -13,13 +13,13 @@ private:
 
 public:
     Cliente(std::string nome, std::string email, std::string senha)
-        : nome(nome), email(email), senha(senha){}
-        
+        : nome(nome), email(email), senha(senha) {}
+
     void logar(std::string email, std::string senha)
     {
-        if(this->senha==senha & this->email==email){
-            std::cout<<"Logado com sucesso"<<std::endl;
-
+        if (this->senha == senha & this->email == email)
+        {
+            std::cout << "Logado com sucesso" << std::endl;
         }
     }
 };
