@@ -1,25 +1,18 @@
 #include <iostream>
 
-
-enum Categoria {
-    CatA,
-    CatB
-};
-
-class Produto
-{
+class Produto {
 private:
     int id;
     std::string descricao;
     std::string nome;
     double preco;
-    int categoria;
 
 public:
     Produto(int id, std::string descricao,
             std::string nome,
-            double preco, int categoria) : id(id), descricao(descricao), nome(nome), preco(preco), categoria(categoria) {}
+            double preco) : id(id), descricao(descricao), nome(nome), preco(preco) {}
 
+    virtual void print() = 0;
     int getId()
     {
         return id;
@@ -32,7 +25,7 @@ public:
     {
         return descricao;
     }
-    double getPreco()
+    double getPreco() const
     { // interessante definir os getters como constantes (const)
         return preco;
     }

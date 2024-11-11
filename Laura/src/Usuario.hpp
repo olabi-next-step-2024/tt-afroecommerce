@@ -10,13 +10,12 @@ class Usuario : public Cliente
 {
 private:
 
-    Carrinho carrinho;
-
 
 public:
+    std::unique_ptr<Carrinho> carrinho;
 
-    Usuario(std::string nome, std::string email, std::string senha, Carrinho& carrinho)
-        : Cliente(nome, email, senha), carrinho(carrinho) {}
+    Usuario(std::string nome, std::string email, std::string senha)
+        : Cliente(nome, email, senha) {}
     void comprar()
     {
         std::cout<<"Compra realizada" << std::endl;
