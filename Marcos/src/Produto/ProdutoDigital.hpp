@@ -1,73 +1,67 @@
-#include <iostream>
+#ifndef PRODUTODIGITAL_HPP
+#define PRODUTODIGITAL_HPP
+
 #include <string>
+#include <iostream>
 #include "Produto.hpp"
 
 class ProdutoDigital : public Produto
 {
 public:
-    ProdutoDigital(std::string nome, std::string descricao, double valor, int quantidade)
-        : Produto(nome, descricao, valor, quantidade) {}
+    ProdutoDigital(int id_produto, std::string nome, std::string descricao, double valor, int quantidade)
+        : Produto(id_produto, nome, descricao, valor, quantidade) {}
 
+    // getters
     std::string getNomeProduto() const override
     {
         return nomeProduto;
     }
-
-    void setNomeProduto(const std::string &novoNomeProduto) override
-    {
-        nomeProduto = novoNomeProduto;
-    }
-
     std::string getDescricao() const override
     {
         return descricaoProduto;
-    }
-
-    void setDescricao(const std::string &novaDescricao) override
-    {
-        descricaoProduto = novaDescricao;
     }
 
     double getPrecoProduto() const override
     {
         return precoProduto;
     }
-
-    void setPrecoProduto(double novoPreco) override
-    {
-        precoProduto = novoPreco;
-    }
-
     int getQuantidadeEstoque() const override
     {
         return quantidadeEstoque;
     }
-
+    int getId_produto() const override{
+        return id_produto;
+    }
+    // setters
+    void setDescricao(const std::string &novaDescricao) override
+    {
+        descricaoProduto = novaDescricao;
+    }
+    void setNomeProduto(const std::string &novoNomeProduto) override
+    {
+        nomeProduto = novoNomeProduto;
+    }
+    void setPrecoProduto(double novoPreco) override
+    {
+        precoProduto = novoPreco;
+    }
     void setQuantidadeEstoque(int novoEstoque) override
     {
         quantidadeEstoque = novoEstoque;
     }
 
-    // Colocar esses outputs em uma única linha para ter algo como:
-    // [0] Produto(%%nome%%, %%descrição%%, %%preço%%, %%estoque%%)
-    // [1] Produto(%%nome%%, %%descrição%%, %%preço%%, %%estoque%%)
     void print() override
     {
-        // std::cout << "Nome: " << getNomeProduto() << std::endl;
-        // std::cout << "Descrição: " << getDescricao() << std::endl;
-        // std::cout << "Preço: " << getPrecoProduto() << std::endl;
-        // std::cout << "Estoque: " << getQuantidadeEstoque() << std::endl;
-        // std::cout << "-----------------------------" << std::endl;
+        std::cout << "Produto("
+                  << "nome=" << getNomeProduto() << ", "
+                  << "descr=" << getDescricao() << ", "
+                  << "preço=" << getPrecoProduto() << ", "
+                  << "qtd.=" << getQuantidadeEstoque() << ")\n";
 
-        std::cout << "Produto(" 
-            << "nome=" << getNomeProduto() << ", " 
-            << "descr=" << getDescricao() << ", " 
-            << "preço=" << getPrecoProduto() << ", " 
-            << "qtd.=" << getQuantidadeEstoque() << ")\n";
-
-        // std::format("");
     }
 
     // Destrutor
-    ~ProdutoDigital() override {}
+    //virtual ~ProdutoDigital() = default;
 };
+
+#endif
