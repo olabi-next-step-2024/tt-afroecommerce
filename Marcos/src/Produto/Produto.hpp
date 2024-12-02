@@ -4,45 +4,54 @@
 
 #include <string>
 
+enum tipoProduto
+{
+    Fisico,
+    Digital
+};
+
+// // Se não sabe exatamente quantas categorias
+// enum categoria
+// {
+//     Categoria1,
+//     Categoria2,
+//     Categoria3,
+//     Categoria4
+// };
+
 class Produto
 {
 protected:
+    int id_produto;
     std::string nomeProduto, descricaoProduto;
-    double precoProduto;
+    float precoProduto;
     int quantidadeEstoque;
-    enum tipoProduto
-    {
-        Fisico,
-        Digital
-    };
-
-    // Se não sabe exatamente quantas categorias 
-    enum categoria
-    {
-        Categoria1,
-        Categoria2,
-        Categoria3,
-        Categoria4
-    };
 
 public:
-    Produto(std::string nome, std::string descricao, double valor, int quantidade)
-        : nomeProduto(nome), descricaoProduto(descricao), precoProduto(valor), quantidadeEstoque(quantidade) {}
+    Produto(int id, std::string nome, std::string descricao, double valor, int quantidade)
+        : id_produto(id), nomeProduto(nome), descricaoProduto(descricao), precoProduto(valor), quantidadeEstoque(quantidade) {}
 
-    virtual ~Produto() {} // *** é preferível usar ~Produto() = default; a usar chaves vazias
+    virtual void atualizar_estoque(int quantidade)
+    {
+        quantidadeEstoque += quantidade;
+    }
 
     virtual void print() = 0;
+
+    virtual ~Produto() = default; // *** é preferível usar ~Produto() = default; a usar chaves vazias
 
     // Getters
     virtual std::string getNomeProduto() const = 0;
     virtual std::string getDescricao() const = 0;
     virtual double getPrecoProduto() const = 0;
     virtual int getQuantidadeEstoque() const = 0;
+    virtual int getId_produto() const = 0;
 
     // Setters
     virtual void setNomeProduto(const std::string &nome) = 0;
     virtual void setDescricao(const std::string &descricao) = 0;
     virtual void setPrecoProduto(double preco) = 0;
+    // virtual void setIdProduto(int id) = 0;
     virtual void setQuantidadeEstoque(int quantidade) = 0;
 };
 

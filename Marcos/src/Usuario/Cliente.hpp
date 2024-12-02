@@ -11,7 +11,7 @@ private:
 
 public:
     Cliente(const std::string &nome, const std::string &email)
-        : Usuario(nome, email), carrinho(new Carrinho()) {}
+        : Usuario(nome, email), carrinho(std::make_unique<Carrinho>()) {}
 
     ~Cliente() {}
 
@@ -30,6 +30,16 @@ public:
         return email;
     }
 
+    void setCarrinho(std::unique_ptr<Carrinho> &carrinho)
+    {
+        this->carrinho = std::move(carrinho);
+    }
+
+    void efetuarCompra()
+    {
+        
+    }
+
     void setEmailCliente(std::string &emailCliente) override
     {
         email = emailCliente;
@@ -45,7 +55,7 @@ public:
         std::cout << "Cliente: "
                   << getNomeCliente()
                   << " email: "
-                  << getEmailCliente() 
+                  << getEmailCliente()
                   << ")\n";
     }
 };
