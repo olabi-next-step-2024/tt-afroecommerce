@@ -1,5 +1,5 @@
 classDiagram
-     ItemCarrinho -- Carrinho
+    ItemCarrinho -- Carrinho
     Cliente -- Carrinho    
     Produto <|-- ProdutoFisico
     Produto <|-- ProdutoDigital
@@ -15,8 +15,7 @@ classDiagram
         - double preco
         - string descricao
         - int estoque
-        
-    
+
     }
     class SistemaEcommerce{
     

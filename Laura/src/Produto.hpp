@@ -1,7 +1,6 @@
 #include <iostream>
 
-class Produto
-{
+class Produto {
 private:
     int id;
     std::string descricao;
@@ -13,6 +12,7 @@ public:
             std::string nome,
             double preco) : id(id), descricao(descricao), nome(nome), preco(preco) {}
 
+    virtual void print() = 0;
     int getId()
     {
         return id;
@@ -25,7 +25,7 @@ public:
     {
         return descricao;
     }
-    double getPreco()
+    double getPreco() const
     { // interessante definir os getters como constantes (const)
         return preco;
     }
