@@ -1,3 +1,6 @@
+#ifndef CARRINHO_HPP
+#define CARRINHO_HPP
+
 #include <iostream>
 #include <string>
 #include <list>
@@ -25,62 +28,56 @@ public:
             produtos.clear();
     }
 
-    void adicionarProduto(std::shared_ptr<Produto> produto, int quantidade)
-    {
-        if (produto->getQuantidadeEstoque() >= quantidade)
-        {
+   void adicionarProduto(std::shared_ptr<Produto> produto, int quantidade) {
+        if (produto->getQuantidadeEstoque() >= quantidade) {
             produtos[produto->getId_produto()] += quantidade;
             produto->atualizar_estoque(-quantidade);
-            std::cout << "Produto adicionado com sucesso dentro do carrinho";
-        }
-        else
-        {
-            std::cout << "Estoque insuficiente para o produto" << std::endl;
+            std::cout << "Produto adicionado ao carrinho com sucesso.\n";
+            calcular_total();
+        } else {
+            std::cout << "Estoque insuficiente para o produto.\n";
         }
     }
     // Função para deletar produto pelo nome
-    void remover_produto(std::shared_ptr<Produto> produto, int quantidade)
-    {
-        if (produtos.find(produto->getId_produto()) != produtos.end())
-        {
-            if (quantidade >= produtos[produto->getId_produto()])
-            {
-                produto->atualizar_estoque(produtos[produto->getId_produto()]);
-                produtos.erase(produto->getId_produto());
-            }
-            else
-            {
-                produtos[produto->getId_produto()] -= quantidade;
+    void removerProduto(std::shared_ptr<Produto> produto, int quantidade) {
+        auto it = produtos.find(produto->getId_produto());
+        if (it != produtos.end()) {
+            if (quantidade >= it->second) {
+                // Remove completamente o produto do carrinho
+                produto->atualizar_estoque(it->second);
+                produtos.erase(it);
+            } else {
+                // Remove apenas a quantidade especificada
+                it->second -= quantidade;
                 produto->atualizar_estoque(quantidade);
             }
+            std::cout << "Produto removido do carrinho com sucesso.\n";
             calcular_total();
+        } else {
+            std::cout << "Produto não encontrado no carrinho.\n";
         }
     }
 
-    void calcular_total()
-    {
-        for (const auto &[nome, quantidade] : produtos)
-        {
-            auto p = gerenciador.buscaProduto(nome);
-            total += p->getPrecoProduto() * quantidade;
+    void calcular_total() {
+        total = 0;  // Reinicializa o total
+        for (const auto& [idProduto, quantidade] : produtos) {
+            auto produto = gerenciador.buscaProduto(idProduto);
+            if (produto) {
+                total += produto->getPrecoProduto() * quantidade;
+            } else {
+                std::cout << "Erro: Produto com ID " << idProduto << " não encontrado.\n";
+            }
         }
     }
 
-    
+    float getTotal(){
+        return total;
+    }
 
-    // void efetuar_compra() {
+    const std::map<int, int>& getProdutos() const {
+        return produtos;
+    }
 
-    // }
-
-    // Produto *buscaProduto(const std::string &nomeProduto)
-    // {
-    //     for (auto &produto : produtos)
-    //     {
-    //         auto it = std::find_if(produtos.begin(), produtos.end(),
-    //                                [&nomeProduto](Produto *x)
-    //                                { return x->getNomeProduto() == nomeProduto; });
-    //     }
-
-    //     return (it != produtos.end()) ? *it : nullptr;
-    // }
 };
+
+#endif

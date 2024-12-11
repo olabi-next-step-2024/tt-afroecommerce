@@ -12,7 +12,7 @@ public:
     Usuario(std::string nome, std::string email) : nome(nome), email(email), id(0) {}
     Usuario(std::string nome, std::string email, int id) : nome(nome), email(email), id(id) {}
 
-    virtual ~Usuario() {}
+    virtual ~Usuario() {};
     virtual void print() = 0;
 
     // Getters

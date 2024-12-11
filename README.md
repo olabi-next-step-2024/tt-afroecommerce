@@ -1,5 +1,7 @@
 Afrocommerce - Projeto Integrador
 
+Link do projeto: [https://docs.google.com/document/d/1HT-XEdlz62DJ6G6c3vL1L8mK7bd46U09Kiu7hINPihw/edit?usp=sharing](https://docs.google.com/document/d/1HT-XEdlz62DJ6G6c3vL1L8mK7bd46U09Kiu7hINPihw/edit?usp=sharing)
+
 O projeto integrador visa consolidar o aprendizado por meio da colaboração para resolução de um desafio real, com a orientação e suporte dos professores. A atividade reforça a prática dos conceitos abordados nas aulas: o desenvolvimento do projeto e as instruções serão realizados durante os dias de laboratório, divididos entre dias de exercícios práticos e dias dedicados ao projeto integrador em si. A alocação de tempo será feita conforme as datas definidas no cronograma para o foco de cada atividade.
 Descrição
 

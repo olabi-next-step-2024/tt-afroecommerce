@@ -26,8 +26,7 @@ public:
             return;
         }
         produtos[idProduto] = produto;
-        std::cout << "Inserindo produto: ";
-        produto->print();
+        std::cout << "Inserindo produto: "; produto->print();
     }
 
     // Função para mostrar informações dos produtos cadastrados
