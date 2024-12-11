@@ -1,3 +1,6 @@
+#ifndef CLIENTE_HPP
+#define CLIENTE_HPP
+
 #include <iostream>
 #include <string>
 #include "Usuario.hpp"
@@ -7,13 +10,13 @@ class Cliente : public Usuario
 {
 
 private:
-    std::unique_ptr<Carrinho> carrinho;
+    std::shared_ptr<Carrinho> carrinho;
 
 public:
-    Cliente(const std::string &nome, const std::string &email)
-        : Usuario(nome, email), carrinho(new Carrinho()) {}
+    Cliente(std::string nome, std::string email)
+        : Usuario(nome, email), carrinho(std::make_unique<Carrinho>()) {}
 
-    ~Cliente() {}
+    ~Cliente() override = default;    
 
     std::string getNomeCliente() const override
     {
@@ -30,6 +33,12 @@ public:
         return email;
     }
 
+    void setCarrinho(std::unique_ptr<Carrinho> &carrinho)
+    {
+        this->carrinho = std::move(carrinho);
+    }
+
+
     void setEmailCliente(std::string &emailCliente) override
     {
         email = emailCliente;
@@ -45,7 +54,9 @@ public:
         std::cout << "Cliente: "
                   << getNomeCliente()
                   << " email: "
-                  << getEmailCliente() 
+                  << getEmailCliente()
                   << ")\n";
     }
 };
+
+#endif

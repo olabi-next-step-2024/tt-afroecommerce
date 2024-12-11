@@ -1,12 +1,14 @@
-#include <iostream>
-#include "src/Produto/Produto.hpp"
-#include "src/Produto/ProdutoDigital.hpp"
-#include "src/Produto/ProdutoFisico.hpp"
-#include "src/Produto/GerenciadorProdutos.hpp"
-#include <vector>
-#include "src/Usuario/Cliente.hpp"
 #include <memory>
+#include <iostream>
+#include <vector>
+#include "src/Produto/Produto.hpp"
+#include "src/Usuario/Cliente.hpp"
 #include "src/Usuario/Usuario.hpp"
+#include "src/Produto/ProdutoFisico.hpp"
+#include "src/Produto/ProdutoDigital.hpp"
+#include "src/Produto/GerenciadorProdutos.hpp"
+#include "src/Sistema.hpp"
+#include "src/Menu.hpp"
 
 enum return_status
 {
@@ -28,45 +30,45 @@ int mostrar(std::shared_ptr<Produto> produto)
     }
 }
 
-// void test1()
-// {
-//     GerenciadorProdutos gerenciador{};
+void test1()
+{
+    GerenciadorProdutos gerenciador;
 
-//     std::cout << "Teste para ver se os produtos DVD e Filme estão sendo inseridos" << std::endl;
-//     std::cout << "******************************************************************************" << std::endl;
-//     // Teste para ver se os produtos DVD e Filme estão sendo inseridos
-//     // ****************************************************************************** //
-//     std::shared_ptr<Produto> dvd = std::make_shared<ProdutoFisico>("DVD", "DVD virgem", 1.50, 1);
-//     std::shared_ptr<Produto> filme = std::make_shared<ProdutoDigital>("Matrix", "Filme dublado", 5, 1);
+    std::cout << "Teste para ver se os produtos DVD e Filme estão sendo inseridos" << std::endl;
+    std::cout << "******************************************************************************" << std::endl;
+    // Teste para ver se os produtos DVD e Filme estão sendo inseridos
+    // ****************************************************************************** //
+    std::shared_ptr<Produto> dvd = std::make_shared<ProdutoFisico>(12, "DVD", "DVD virgem", 1.50, 1);
+    std::shared_ptr<Produto> filme = std::make_shared<ProdutoDigital>(27, "Matrix", "Filme dublado", 5, 1);
 
-//     gerenciador.cadastrarProduto(dvd);
-//     gerenciador.cadastrarProduto(filme);
+    gerenciador.cadastrarProduto(dvd);
+    gerenciador.cadastrarProduto(filme);
 
-//     gerenciador.mostrarProdutos();
-//     // ****************************************************************************** //
+    gerenciador.mostrarProdutos();
+    // ****************************************************************************** //
 
-//     // Teste de alteração do valor de produto
-//     // ****************************************************************************** //
-//     gerenciador.buscaProduto("Matrix")->print();
-//     std::shared_ptr<Produto> ret = gerenciador.buscaProduto("DVD");
-//     if (ret != nullptr)
-//     {
-//         ret->print();
-//     }
-// }
+    // Teste de alteração do valor de produto
+    // ****************************************************************************** //
+    gerenciador.buscaProduto(27)->print();
+    std::shared_ptr<Produto> ret = gerenciador.buscaProduto(12);
+    if (ret != nullptr)
+    {
+        ret->print();
+    }
+    gerenciador.atualizarProduto(dvd, 12, "DVD Aurora Blueray", "", -1, -1);
 
-//     gerenciador.atualizarProduto(dvd, "DVD Aurora Blueray", "", -1, -1);
+    gerenciador.mostrarProdutos();
+    // ****************************************************************************** //
+}
 
-//     gerenciador.mostrarProdutos();
-//     // ****************************************************************************** //
 // }
 
 void test2()
 {
     GerenciadorProdutos gerenciador{};
 
-    std::shared_ptr<Produto> dvd = std::make_shared<ProdutoFisico>("DVD", "DVD virgem", 1.50, 1);
-    std::shared_ptr<Produto> filme = std::make_shared<ProdutoDigital>("Matrix", "Filme dublado", 5, 1);
+    std::shared_ptr<Produto> dvd = std::make_shared<ProdutoFisico>(12, "DVD", "DVD virgem", 1.50, 1);
+    std::shared_ptr<Produto> filme = std::make_shared<ProdutoDigital>(27, "Matrix", "Filme dublado", 5, 1);
 
     gerenciador.cadastrarProduto(dvd);
     gerenciador.cadastrarProduto(filme);
@@ -75,8 +77,8 @@ void test2()
     // ****************************************************************************** //
     // Verificar produtos não encontrados
     // ****************************************************************************** //
-    std::shared_ptr<Produto> produto = gerenciador.buscaProduto("MadMax");
-    std::shared_ptr<Produto> produto1 = gerenciador.buscaProduto("Matrix");
+    std::shared_ptr<Produto> produto = gerenciador.buscaProduto(12);
+    std::shared_ptr<Produto> produto1 = gerenciador.buscaProduto(26);
     mostrar(produto);
     mostrar(produto1);
 }
@@ -85,15 +87,15 @@ void test3()
 {
     GerenciadorProdutos gerenciador{};
 
-    std::shared_ptr<Produto> dvd = std::make_shared<ProdutoFisico>("DVD", "DVD virgem", 1.50, 1);
-    std::shared_ptr<Produto> filme = std::make_shared<ProdutoDigital>("Matrix", "Filme dublado", 5, 1);
-    std::shared_ptr<Produto> tenis = std::make_shared<Produto>("Tenis", "Tenis de corrida Nike", 357.35, 2);
+    std::shared_ptr<Produto> dvd = std::make_shared<ProdutoFisico>(12, "DVD", "DVD virgem", 1.50, 1);
+    std::shared_ptr<Produto> filme = std::make_shared<ProdutoDigital>(27, "Matrix", "Filme dublado", 5, 1);
+    std::shared_ptr<Produto> tenis = std::make_shared<ProdutoFisico>(32, "Tenis", "Tenis de corrida Nike", 357.35, 2);
 
     gerenciador.cadastrarProduto(dvd);
     gerenciador.cadastrarProduto(filme);
     gerenciador.cadastrarProduto(tenis);
 
-    gerenciador.deletarProduto("Matrix");
+    gerenciador.deletarProduto(27);
     std::cout << "Estou passando por aqui";
 
     gerenciador.mostrarProdutos();
@@ -101,23 +103,40 @@ void test3()
 
 void test4()
 {
-    GerenciadorProdutos gerenciador{};
-    std::shared_ptr<Produto> dvd = std::make_shared<ProdutoFisico>("DVD", "DVD virgem", 1.50, 1);
-    std::shared_ptr<Produto> filme = std::make_shared<ProdutoDigital>("Matrix", "Filme dublado", 5, 1);
-    std::shared_ptr<Produto> tenis = std::make_shared<ProdutoFisico>("Tenis", "Tenis de corrida Nike", 357.35, 2);
+    GerenciadorProdutos gerenciador;
+    std::shared_ptr<Produto> dvd = std::make_shared<ProdutoFisico>(12, "DVD", "DVD virgem", 1.50, 1);
+    std::shared_ptr<Produto> filme = std::make_shared<ProdutoDigital>(27, "Matrix", "Filme dublado", 5, 1);
+    std::shared_ptr<Produto> tenis = std::make_shared<ProdutoFisico>(32, "Tenis", "Tenis de corrida Nike", 357.35, 2);
 
     gerenciador.cadastrarProduto(dvd);
     gerenciador.cadastrarProduto(filme);
     gerenciador.cadastrarProduto(tenis);
 
     Usuario *cliente = new Cliente("Marcos Paulo", "teste@gmail.com");
-    // cliente-> print();
+    cliente->print();
+    delete cliente;
 }
+void test5()
+{
+    GerenciadorProdutos gerenciador;
+    std::shared_ptr<Produto> dvd = std::make_shared<ProdutoFisico>(12, "DVD", "DVD virgem", 1.50, 1);
+    std::shared_ptr<Produto> filme = std::make_shared<ProdutoDigital>(27, "Matrix", "Filme dublado", 5, 1);
+    std::shared_ptr<Produto> tenis = std::make_shared<ProdutoFisico>(32, "Tenis", "Tenis de corrida Nike", 357.35, 2);
+
+    gerenciador.cadastrarProduto(dvd);
+    gerenciador.cadastrarProduto(filme);
+    gerenciador.cadastrarProduto(tenis);
+
+    Sistema sistema;
+    Cliente cliente1("Marcos Paulo", "teste@gmail.com");
+    // sistema.cadastrarCliente(cliente);
+
+}
+
 int main()
 {
-    // test1();
-    // test2();
-    test3();
-    teste4();
+    Menu menu;
+    menu.menu();
+    // test4();
     return 0;
 }

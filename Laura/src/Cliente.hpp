@@ -19,7 +19,10 @@ public:
     {
         if (this->senha == senha & this->email == email)
         {
-            std::cout << "Logado com sucesso" << std::endl;
+            std::cout << "[" << email << "]: " << "Logado com sucesso." << std::endl;
+        }
+        else {
+            std::cout << "Usuário ou senha incorretos." << std::endl;
         }
     }
 };
