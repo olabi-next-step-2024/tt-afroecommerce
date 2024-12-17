@@ -9,7 +9,11 @@ Funcionalidades do Projeto
 Como serão feitas as entregas?
 
 Você fará as entregas de forma incremental, utilizando os dias dos laboratórios para focar na resolução a partir dos conhecimentos adquiridos durante as aulas.
-Onde serão feitas as entregas
+Onde serão feitas as entregas.
+
+
+**Orientações para elaboração do projeto**: [Projeto-Integrador.pdf](https://github.com/user-attachments/files/18169154/Projeto-Integrador.docx.pdf)
+
 
 A entregas devem ser feitas dentro desse repositório, seguindo as instruções abaixo:
 
